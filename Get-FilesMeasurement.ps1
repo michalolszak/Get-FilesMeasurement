@@ -6,7 +6,7 @@
    Get info about files properties- count and max, in provided folders
    Function has two parameters one for array of strings as arguments for path parameter second for file with list of paths from file.
    Paths in File will be stripped of any quotes, as powershell automagically adds double qoutes to paths with whitespaces.
-   Function uses Get-ChildItem converget with Measure-Object it measuers Count and Sum property Length, for files in provided paths.
+   Function uses Get-ChildItem converget with Measure-Object - it measuers Count and Sum for property Length, for files in provided paths.
 
    Results shows Microsoft.PowerShell.Commands.GenericMeasureInfo
    for property Length.
