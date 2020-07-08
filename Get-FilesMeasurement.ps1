@@ -68,7 +68,7 @@
     Created by   : Michał Olszak
     Date Coded   : 2020-07-08
     More info    : michal.olszak@ing.com
-    GitHub       :
+    GitHub       : https://github.com/michalolszak/Get-FilesMeasurement
 #>
 #endregion info
 #region Function
