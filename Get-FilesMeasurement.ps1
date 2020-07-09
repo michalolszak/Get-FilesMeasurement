@@ -28,19 +28,19 @@
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     Get-FilesMeasurement -path "C:\folder"
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     Get-FilesMeasurement -FilePath "C:\folder"
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     'C:\folder' | Get-FilesMeasurement
 
@@ -54,11 +54,11 @@
 
     Description
     ---------------------------------------
-    Test of values from pipeline by property name (paths).
+    Test of values from pipeline by property name (path).
 .INPUTS
    System.String
 
-    Paths parameter pipeline both by Value and by Property Name value and has default value of localhost. (Parameter Set = ComputerNames)
+    Paths parameter pipeline both by Value and by Property Name value and has default value of $psscriptroot. (Parameter Set = byArgument)
     FilePath parameter does not pipeline and does not have default value. (Parameter Set = FilePath)
 .OUTPUTS
    Microsoft.PowerShell.Commands.GenericMeasureInfo
