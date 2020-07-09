@@ -28,19 +28,19 @@
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     Get-FilesMeasurement -path "C:\folder"
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     Get-FilesMeasurement -FilePath "C:\folder"
 
     Description
     ---------------------------------------
-    Test of default parameter with default value ( computers = '$psscriptroot' ) in default ParameterSet = Argument.
+    Test of default parameter with default value ( path = '$psscriptroot' ) in default ParameterSet = Argument.
 .EXAMPLE
     'C:\folder' | Get-FilesMeasurement
 
@@ -54,11 +54,11 @@
 
     Description
     ---------------------------------------
-    Test of values from pipeline by property name (paths).
+    Test of values from pipeline by property name (path).
 .INPUTS
    System.String
 
-    Paths parameter pipeline both by Value and by Property Name value and has default value of localhost. (Parameter Set = ComputerNames)
+    Paths parameter pipeline both by Value and by Property Name value and has default value of $psscriptroot. (Parameter Set = byArgument)
     FilePath parameter does not pipeline and does not have default value. (Parameter Set = FilePath)
 .OUTPUTS
    Microsoft.PowerShell.Commands.GenericMeasureInfo
@@ -103,7 +103,7 @@ function Get-FilesMeasurement
                     }
                 else
                     {
-                        throw "${$_} - This path is not correct, check it again for correctness. Maybe network issue?"
+                        write-error  "$($_)- This path is not correct, check it again for correctness. Maybe network issue?"
                     }
             })]
         [Alias("pt","source")]
@@ -121,7 +121,7 @@ function Get-FilesMeasurement
                     }
                     else
                     {
-                        throw "${$_} - This path is not correct, check it again for correctness. Maybe network issue? This should be path to file"
+                        write-error "$($_) - This path is not correct, check it again for correctness. Maybe network issue? This should be path to file"
                     }
             })]
         [ValidateNotNull()]
@@ -134,12 +134,12 @@ function Get-FilesMeasurement
         if ($pscmdlet.ParameterSetName -eq 'FilePath')
         {
             Write-Verbose -message "Reading content of: $FilePath"
-            $path = ((Get-Content -LiteralPath $FilePath).trim("'")).trim('"')
-            foreach ($item in $path)
+            $pathCheck = ((Get-Content -LiteralPath $FilePath).trim("'")).trim('"')
+            foreach ($item in $pathCheck)
             {
                 if (-not (test-path -literalPath $item))
                 {
-                    throw "Path ${$item} inside file ${$FilePath} is incorrect, or network issue"
+                    Write-Error "Path `"$($item)`" inside file `"$($FilePath)`" is incorrect, or network issue"
                 }
             }
         }
@@ -151,7 +151,7 @@ function Get-FilesMeasurement
             $getResults = (Get-ChildItem -Path $item -File -Recurse | Measure-Object -property Length -sum)
             if ($null -eq $getResults)
             {
-                Write-host "There are no files inside $item and its child containers"
+                Write-Verbose "There are no files inside $item and its child containers"
             }
             else
             {
