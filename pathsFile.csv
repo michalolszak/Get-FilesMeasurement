@@ -1,4 +1,4 @@
 path
-'.\Get-FilesMeasurement\testFolder1'
-'.\Get-FilesMeasurement\testFolder2'
-".\Get-FilesMeasurement\"
+'folderLocation\testFolder1'
+'folderLocation\testFolder2'
+"folderLocation\"
